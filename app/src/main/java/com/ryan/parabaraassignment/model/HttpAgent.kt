@@ -28,7 +28,7 @@ open class HttpAgent {
                 @Throws(IOException::class)
                 override fun intercept(chain: Interceptor.Chain): Response {
                     val requestBuilder : Request.Builder = chain.request().newBuilder()
-                        .header("Content-Type", "application/json")
+                        .header("x-token", "4gqGDji039ujiz1nHzXb8N4dh")
                     val request: Request = requestBuilder.build()
                     return chain.proceed(request)
                 }
