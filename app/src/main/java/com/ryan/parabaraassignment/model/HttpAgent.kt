@@ -1,9 +1,6 @@
 package com.ryan.parabaraassignment.model
 
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,6 +15,16 @@ open class HttpAgent {
 
         fun setUrl(url : String) {
             baseUrl = url;
+        }
+
+        fun getError(responseBody: ResponseBody): BaseResponse {
+            lateinit var response: BaseResponse
+            try {
+                response = retrofitClient?.responseBodyConverter<BaseResponse>(ResponseBody.javaClass, ResponseBody.javaClass.getAnnotations())!!.convert(responseBody)!!
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return response
         }
     }
 
